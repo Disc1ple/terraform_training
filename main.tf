@@ -33,7 +33,7 @@ data "aws_ami" "amazon_linux" {
 module "security_group" {
   source              = "terraform-aws-modules/security-group/aws"
   version             = "~> 3.0"
-  name                = "training1"
+  name                = "training1-sg"
   description         = "Security group for training1 usage with EC2 instance"
   vpc_id              = data.aws_vpc.default.id
   ingress_cidr_blocks = ["0.0.0.0/0"]
@@ -47,7 +47,7 @@ resource "aws_eip" "this" {
 }
 
 resource "aws_placement_group" "web" {
-  name     = "hunky-dory-pg"
+  name     = "training1-hunky-dory-pg"
   strategy = "cluster"
 }
 
