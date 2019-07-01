@@ -33,8 +33,8 @@ data "aws_ami" "amazon_linux" {
 module "security_group" {
   source              = "terraform-aws-modules/security-group/aws"
   version             = "~> 3.0"
-  name                = "training1-sg"
-  description         = "Security group for training1 usage with EC2 instance"
+  name                = "training1-tf-instance-sg"
+  description         = "Security group for trainingX usage with EC2 instance"
   vpc_id              = data.aws_vpc.default.id
   ingress_cidr_blocks = ["0.0.0.0/0"]
   ingress_rules       = ["http-80-tcp", "all-icmp"]
@@ -43,23 +43,19 @@ module "security_group" {
 
 resource "aws_eip" "this" {
   vpc      = true
-  instance = module.ec2_with_t2_unlimited.id[0]
+  instance = module.ec2.id[0]
 }
 
-resource "aws_placement_group" "web" {
-  name     = "training1-hunky-dory-pg"
-  strategy = "cluster"
-}
-
-module "ec2_with_t2_unlimited" {
+module "ec2" {
   source                      = "terraform-aws-modules/ec2-instance/aws"
   instance_count              = 1
-  name                        = "training1-t2-unlimited"
+  name                        = "training1-tf-instance"
   ami                         = data.aws_ami.amazon_linux.id
   instance_type               = "t2.micro"
   cpu_credits                 = "unlimited"
   subnet_id                   = tolist(data.aws_subnet_ids.all.ids)[0]
   vpc_security_group_ids      = [module.security_group.this_security_group_id]
   associate_public_ip_address = true
+  user_data                   = file("installers/web_server.sh")
 }
 
