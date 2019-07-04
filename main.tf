@@ -2,9 +2,6 @@ provider "aws" {
   region = "us-east-2"
 }
 
-##################################################################
-# Data sources to get VPC, subnet, security group and AMI details
-##################################################################
 data "aws_vpc" "default" {
   default = true
 }
