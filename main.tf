@@ -30,6 +30,7 @@ data "aws_ami" "amazon_linux" {
 module "security_group" {
   source              = "terraform-aws-modules/security-group/aws"
   version             = "~> 3.0"
+  #############>>>> CHANGE LINE BELOW TO MATCH YOUR STUDENT NUMBER <<<<################
   name                = "training1-tf-instance-sg"
   description         = "Security group for trainingX usage with EC2 instance"
   vpc_id              = data.aws_vpc.default.id
