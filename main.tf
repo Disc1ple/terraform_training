@@ -45,6 +45,7 @@ resource "aws_eip" "this" {
 
 module "ec2" {
   source                      = "terraform-aws-modules/ec2-instance/aws"
+  #############>>>> CHANGE LINE BELOW TO MATCH YOUR STUDENT NUMBER <<<<################
   name                        = "training1-tf-instance"
   ami                         = data.aws_ami.amazon_linux.id
   instance_type               = "t2.micro"
