@@ -104,5 +104,5 @@ override.tf.json
 .idea/modules.xml
 .idea/terraform_training.iml
 .idea/vcs.xml
-.idea/**
+.idea/pylint.xml
 .idea/terraform_training_environment.iml
