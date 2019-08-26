@@ -31,7 +31,7 @@ module "security_group" {
   source              = "terraform-aws-modules/security-group/aws"
   version             = "~> 3.0"
   #############>>>> CHANGE LINE BELOW TO MATCH YOUR STUDENT NUMBER <<<<################
-  name                = "training1-tf-instance-sg"
+  name                = "training99-tf-instance-sg"
   description         = "Security group for trainingX usage with EC2 instance"
   vpc_id              = data.aws_vpc.default.id
   ingress_cidr_blocks = ["0.0.0.0/0"]
@@ -47,7 +47,7 @@ resource "aws_eip" "this" {
 module "ec2" {
   source                      = "terraform-aws-modules/ec2-instance/aws"
   #############>>>> CHANGE LINE BELOW TO MATCH YOUR STUDENT NUMBER <<<<################
-  name                        = "training1-tf-instance"
+  name                        = "training99-tf-instance"
   ami                         = data.aws_ami.amazon_linux.id
   instance_type               = "t2.micro"
   subnet_id                   = tolist(data.aws_subnet_ids.all.ids)[0]
